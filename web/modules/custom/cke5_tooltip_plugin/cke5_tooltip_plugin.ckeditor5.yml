@@ -1,0 +1,16 @@
+cke5_tooltip_plugin_tooltip:
+  ckeditor5:
+    plugins:
+      - tooltip.Tooltip
+  drupal:
+    label: Tooltip
+    library: cke5_tooltip_plugin/tooltip
+    admin_library: cke5_tooltip_plugin/tooltip.admin
+    toolbar_items:
+      tooltip:
+        label: Tooltip
+    elements:
+      - <>
+    conditions:
+      plugins:
+        - ckeditor5_link

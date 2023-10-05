@@ -1,0 +1,11 @@
+tooltip:
+  version: "1.0.0"
+  js:
+    js/build/tooltip.js: { preprocess: false, minified: true }
+  dependencies:
+    - core/ckeditor5
+
+tooltip.admin:
+  css:
+    theme:
+      css/tooltip-admin.css: {}
