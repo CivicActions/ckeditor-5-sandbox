@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+## Description: Configures local setup
+## Usage: setup
+## Example: setup
+
+echo "=== Composer install:"
+ddev composer install
+ddev drush cr
+
+echo "=== Import config:"
+ddev drush cim -y
+ddev drush cr
