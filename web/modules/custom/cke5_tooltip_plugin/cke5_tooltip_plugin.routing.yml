@@ -1,0 +1,7 @@
+cke5_tooltip_plugin.autocomplete:
+  path: '/admin/cke5_tooltip_plugin/tooltip/autocomplete'
+  defaults:
+    _controller: '\Drupal\cke5_tooltip_plugin\Controller\TooltipController::handleAutocomplete'
+    _format: json
+  requirements:
+    _access: 'TRUE'

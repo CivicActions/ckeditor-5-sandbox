@@ -1,0 +1,98 @@
+<?php
+
+
+use Drupal\Component\Utility\Html;
+
+function cke5_tooltip_plugin_preprocess_field(&$variables) {
+  $field_types_to_process = [
+    'text_with_summary',
+    'text_long'
+  ];
+  if (in_array($variables['field_type'], $field_types_to_process)) {
+    $variables['tooltips'] = '';
+
+    foreach ($variables['items'] as &$item) {
+      if ($item['content']['#format'] === 'plain_text') {
+        continue;
+      }
+
+      /*
+        * $tooltip_trigger_pattern looks for anchors with class,
+        * 'ds-c-tooltip__trigger-link' and a 'data-tooltip-id' attribute with a
+        * numeric value. If it finds them, it saves the contents of
+        * `data-tooltip-id`, and the tag contents.
+        */
+      $text = $item['content']['#text'];
+      $tooltip_trigger_pattern = '/<a class="ds-c-tooltip__trigger-link.*?" data-tooltip-id="(?P<id>\d+).*?">(?P<tooltip_text>.*?)<\/a>/';
+
+      if (preg_match_all($tooltip_trigger_pattern, $text, $matches, PREG_SET_ORDER)) {
+        try {
+          if (count($matches) > 1 && is_array($matches[0])) {
+            foreach ($matches as $match) {
+              $text = _cke5_tooltip_plugin_format_tooltip($match, $text);
+            }
+          }
+          else {
+            $text = _cke5_tooltip_plugin_format_tooltip($matches[0], $text);
+          }
+
+          $item['content']['#text'] = $text;
+        }
+        catch (Exception $exception) {
+          Drupal::logger('cke5_tooltip_plugin')
+            ->error(
+              'Error trying to create tooltips: %error',
+              ['%error' => $exception->getMessage()]
+            );
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Replaces tooltips in html with content in a React-friendly format.
+ *
+ * @param array $data
+ *   Array, ['id' => tooltip term id, 'tooltip_text' => tooltip text], used to
+ *   populate replacement.
+ * @param string $rich_text
+ *   The text to do replacement on.
+ *
+ * @return string|null
+ *   The contents of $rich_text with replacement.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ */
+function _cke5_tooltip_plugin_format_tooltip(array $data, $rich_text) {
+  /** @var Drupal\node\Entity\Node $tooltip */
+  $tooltip = Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($data['id']);
+  if ($tooltip) {
+    $view_builder = \Drupal::entityTypeManager()->getViewBuilder('taxonomy_term');
+    $pre_render = $view_builder->view($tooltip, 'tooltip');
+    $rendered_tooltip = \Drupal::service('renderer')->render($pre_render);
+    // Replace '$' with '&dollar;' in the tooltip body, otherwise if there's a
+    // digit following it, the later preg_replace will treat it like a
+    // backreference (probably with a value of 'null' unless you have $0)
+    $tooltip_body = Html::escape(trim(str_replace('$', '&dollar;', $rendered_tooltip)));
+    // Tags in the trigger text don't render properly in the component.
+    $tooltip_trigger = strip_tags($data['tooltip_text']);
+    $pre_react = <<<EOT
+<a data-content="$tooltip_body" class="ds-c-tooltip__trigger-link">
+    $tooltip_trigger
+</a>
+EOT;
+  } else {
+    $pre_react = strip_tags($data['tooltip_text']);
+  }
+
+  // Matches an anchor with class, 'ds-c-tooltip__trigger-link', and expected
+  // data-tooltip-id.
+  $tooltip_match = '/<a class="ds-c-tooltip__trigger-link.*?" data-tooltip-id="' . $data['id'] . '".*?>.*?<\/a>/';
+
+  // Limit this replacement to just 1, so that we don't replace multiple
+  // tooltips if the same one is used multiple times.
+  return preg_replace($tooltip_match, $pre_react, $rich_text, 1);
+}
+

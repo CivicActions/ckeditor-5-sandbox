@@ -10,7 +10,9 @@ cke5_tooltip_plugin_tooltip:
       tooltip:
         label: Tooltip
     elements:
-      - <>
+      - <a class="ds-c-tooltip__trigger-link" data-tooltip-id>
+      - <span>
+      - <span class data-content data-error-type data-title data-tooltip-id>
     conditions:
       plugins:
         - ckeditor5_link
