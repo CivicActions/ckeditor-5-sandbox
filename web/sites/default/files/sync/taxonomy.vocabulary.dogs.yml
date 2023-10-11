@@ -1,0 +1,10 @@
+uuid: 53e056dc-be44-4c3b-b8bc-d0efd6f7face
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: LGTFmqhA_JgpspmO1QX7FKFAskMuV0zNEYX4bP8L170
+name: Dogs
+vid: dogs
+description: Dogs
+weight: -10
