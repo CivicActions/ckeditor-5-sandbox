@@ -1,0 +1,8 @@
+name: 'Default content dogs'
+type: module
+hidden: TRUE
+description: 'Default content dogs'
+package: Testing
+core_version_requirement: ^10
+dependencies:
+  - default_content:default_content
