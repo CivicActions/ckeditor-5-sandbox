@@ -40,7 +40,7 @@ export default class TooltipEditing extends Plugin {
         attributes: [ 'data-tooltip-id' ]
       },
       model: {
-        key: 'tooltipLink',
+        key: 'tooltip',
         value: viewElement => viewElement.getAttribute( 'data-tooltip-id' ),
       }
     } );
