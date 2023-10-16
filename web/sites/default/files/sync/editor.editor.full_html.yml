@@ -92,7 +92,8 @@ settings:
       reversed: true
       startIndex: true
     ckeditor5_sourceEditing:
-      allowed_tags: {  }
+      allowed_tags:
+        - '<span class data-tooltip-id data-content>'
 image_upload:
   status: true
   scheme: public
