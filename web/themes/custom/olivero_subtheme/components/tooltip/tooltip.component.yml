@@ -27,6 +27,3 @@ libraryOverrides:
   dependencies:
     - olivero_subtheme/react-components.shared
     - olivero_subtheme/react-components.tooltip
-  css:
-    component:
-      css/tooltip.overrides.css: {}

@@ -2,6 +2,8 @@ global:
   version: VERSION
   css:
     base:
+      # Include the CSS custom properties (a.k.a. 'variables') from the CMS Design System.
+      https://design.cms.gov/cdn/design-system/8.0.2/css/core-theme.css: { type: external, minified: true }
       css/styles.css: {}
 
 react-components.shared:
