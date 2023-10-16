@@ -1,0 +1,38 @@
+{
+  "name": "cke_5_sandbox_cms_ds_components",
+  "version": "1.0.0",
+  "description": "Bundled CMS Design System React components for use in Drupal",
+  "targets": {
+    "help-drawer": {
+      "context": "browser",
+      "source": "./src/help-drawer/help-drawer.html",
+      "distDir": "./build",
+      "sourceMap": false
+    },
+    "tooltip": {
+      "context": "browser",
+      "source": "./src/tooltip/tooltip.html",
+      "distDir": "./build",
+      "sourceMap": false
+    }
+  },
+  "scripts": {
+    "dev": "parcel",
+    "bundle": "parcel build"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.10.0",
+    "parcel": "^2.9.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "@cmsgov/design-system": "^8.0.0",
+    "html-entities": "^2.4.0",
+    "html-react-parser": "^4.2.1",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
+  },
+  "engines": {
+    "node": "^18.0.0"
+  }
+}

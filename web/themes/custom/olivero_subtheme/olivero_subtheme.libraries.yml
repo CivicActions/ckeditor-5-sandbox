@@ -1,0 +1,18 @@
+global:
+  version: VERSION
+  css:
+    base:
+      css/styles.css: {}
+
+react-components.shared:
+  version: VERSION
+  js:
+    react-components/build/shared/shared.bundle.js: { attributes: { type: module } }
+
+react-components.tooltip:
+  version: VERSION
+  js:
+    react-components/build/tooltip/tooltip.bundle.js: { attributes: { type: module } }
+  css:
+    component:
+      react-components/build/tooltip/tooltip.bundle.css: {}

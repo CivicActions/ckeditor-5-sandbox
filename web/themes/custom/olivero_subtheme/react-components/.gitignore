@@ -1,0 +1,7 @@
+dist
+node_modules
+.parcel-cache
+build/*/*.*
+!build/*/*.bundle.js
+!build/*/*.bundle.css
+
