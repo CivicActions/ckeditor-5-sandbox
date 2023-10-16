@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+## Description: Bundles CMS Design System componetns with Parcel, to create production React js files.
+## Usage: parcel-bundle
+## Example: ddev parcel-bundle
+
+echo "=== Building production bundle of CMS Design System Components:"
+npm --prefix /var/www/html/web/themes/custom/olivero_subtheme/react-components run bundle
