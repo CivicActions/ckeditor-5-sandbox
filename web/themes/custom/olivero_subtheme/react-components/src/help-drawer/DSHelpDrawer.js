@@ -4,19 +4,20 @@ import parse from 'html-react-parser';
 import HelpDrawerToggle from '@cmsgov/design-system/dist/react-components/esm/HelpDrawer/HelpDrawerToggle';
 import HelpDrawer from '@cmsgov/design-system/dist/react-components/esm/HelpDrawer/HelpDrawer';
 import Tooltip from '@cmsgov/design-system/dist/react-components/esm/Tooltip/Tooltip';
-import { CloseIconThin } from '@cmsgov/design-system/dist/react-components/esm/Icons';
+import { CloseIconThin, InfoCircleIconThin } from '@cmsgov/design-system/dist/react-components/esm/Icons';
+import '../tooltip/tooltip.scss';
 
 function DSHelpDrawer({toggle, drawer_heading, drawer_content}) {
   const [drawer, showDrawer] = useState(false);
 
-  // function handleDrawerOpen() {
-  //   showDrawer(true);
-  //   document.addEventListener('click', function(e) {
-  //     if (e.target.classList.contains('ds-c-help-drawer')) {
-  //       showDrawer(false);
-  //     }
-  //   });
-  // }
+  function handleDrawerOpen() {
+    showDrawer(true);
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('ds-c-help-drawer')) {
+        showDrawer(false);
+      }
+    });
+  }
 
   // Options for the html-react-parser that target tooltips included
   // in help drawer content.
@@ -29,7 +30,7 @@ function DSHelpDrawer({toggle, drawer_heading, drawer_content}) {
           <span className='tooltip' data-tooltip-id={attribs['data-tooltip-id']}>
             <Tooltip
               className={'ds-c-tooltip__trigger-link'}
-              component="a"
+              component="button"
               placement="auto"
               title={parse(decode(attribs['data-content']))}>
               {parse(children[0]['data'])}
@@ -44,10 +45,10 @@ function DSHelpDrawer({toggle, drawer_heading, drawer_content}) {
     <>
       <HelpDrawerToggle
         helpDrawerOpen={drawer}
-        showDrawer={() => showDrawer(true)}
+        showDrawer={() => handleDrawerOpen()}
         inline={true}
       >
-        {toggle} <i className="far fa-info-circle" aria-hidden="true"></i>
+        {toggle} <InfoCircleIconThin ariaHidden={true} />
       </HelpDrawerToggle>
       {drawer && <HelpDrawer
           closeButtonText={<CloseIconThin className="ds-u-font-size--lg" />}

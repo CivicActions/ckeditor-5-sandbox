@@ -1,7 +1,6 @@
 import { render } from 'react-dom';
 import DSHelpDrawer from './DSHelpDrawer';
-import '@cmsgov/design-system/dist/css/core-theme.css';
-import '@cmsgov/design-system/dist/css/index.css';
+import './help-drawer.scss';
 
 const drawers = document.querySelectorAll('.help-drawer');
 

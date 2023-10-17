@@ -5,20 +5,21 @@ props:
   type: object
   required:
     - content
+    - id
     - trigger_text
   properties:
+    content:
+      type: string
+      title: Content
+      description: The tooltip content that is displayed on hover or focus. This is included in a data attribute, so all HTML must be escaped.
     id:
       type: string
       title: Tooltip ID
       description: The ID of the tooltip entity.
-    content:
-      type: string
-      title: Content
-      description: The tooltip content that is displayed on hover or focus.
     trigger_text:
       type: string
       title: Trigger Text
-      description: The text that is used for the tooltip link
+      description: The text that is used for the tooltip link.
 slots:
   tooltip_content:
       title: Tooltip Trigger

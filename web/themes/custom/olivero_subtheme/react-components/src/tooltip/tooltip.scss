@@ -1,3 +1,7 @@
+// Component styling from the CMS Design system.
+// Styling has been modified for demonstration
+// purposes.
+
 @use '../scss/layout' as *;
 @use '../scss/base' as *;
 @use '../scss/mixins';
@@ -42,6 +46,7 @@
   @extend %trigger-reset-styles;
   @extend %trigger-underline-styles;
   color: var(--tooltip-trigger__color);
+  font-size: inherit;
   padding: 0;
 
   @media (forced-colors: active) {

@@ -108,10 +108,23 @@
     {{ content|without('comment') }}
     <hr />
     <div class="text-content">
-      {% embed 'olivero_subtheme:tooltip' with {
+      {% set drawer_sample_content %}
+        <p>Drawer sample content</p>
+        <p>
+          Aenean lacinia bibendum nulla sed consectetur. {% embed 'olivero_subtheme:tooltip' with {
+              id: '1234',
+              content: 'Hey! Here\'s a tooltip, yay!',
+              tooltip_trigger: 'Hover on this thing to see a tooltip in action!',
+            } only 
+          %}
+          {% endembed %} est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+        </p>
+      {% endset %}
+      {% embed 'olivero_subtheme:help-drawer' with {
           id: '1234',
-          content: 'Hey! Here\'s a freakin\' tooltip, yo!',
-          tooltip_trigger: 'Hover on this thing to see a tooltip in action!',
+          title: 'Sample Help Drawer',
+          content: drawer_sample_content|escape('html_attr'),
+          drawer_trigger: 'Click here to see a help drawer in action!',
         } only 
       %}
       {% endembed %}
