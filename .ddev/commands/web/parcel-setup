@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+## Description: Installs node packages for CMS DS components.
+## Usage: parcel-setup
+## Example: ddev parcel-setup
+
+echo "=== Installing CMS Design System Packages:"
+npm --prefix /var/www/html/web/themes/custom/olivero_subtheme/react-components install

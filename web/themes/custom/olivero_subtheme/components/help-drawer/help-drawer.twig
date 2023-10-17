@@ -1,0 +1,11 @@
+{#
+  If 'content' prop includes HTML markup, be sure to pass in
+  an escaped string.
+  content: my_content_var|escape('html_attr')
+  See: https://twig.symfony.com/doc/3.x/filters/escape.html
+#}
+<span class="help-drawer" data-help-drawer-id="{{ id }}" data-title="{{ title }}" data-content="{{ content }}">
+  {% block drawer_content %}
+    {{ drawer_trigger }}
+  {% endblock %}
+</span>

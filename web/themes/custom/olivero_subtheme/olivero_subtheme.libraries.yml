@@ -1,0 +1,28 @@
+global:
+  version: VERSION
+  css:
+    base:
+      # Include the CSS custom properties (a.k.a. 'variables') from the CMS Design System.
+      https://design.cms.gov/cdn/design-system/8.0.2/css/core-theme.css: { type: external, minified: true }
+      css/styles.css: {}
+
+react-components.shared:
+  version: VERSION
+  js:
+    react-components/build/shared/shared.bundle.js: { attributes: { type: module } }
+
+react-components.help-drawer:
+  version: VERSION
+  js:
+    react-components/build/help-drawer/help-drawer.bundle.js: { attributes: { type: module } }
+  css:
+    component:
+      react-components/build/help-drawer/help-drawer.bundle.css: {}
+
+react-components.tooltip:
+  version: VERSION
+  js:
+    react-components/build/tooltip/tooltip.bundle.js: { attributes: { type: module } }
+  css:
+    component:
+      react-components/build/tooltip/tooltip.bundle.css: {}

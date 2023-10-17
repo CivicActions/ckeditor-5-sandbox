@@ -1,0 +1,12 @@
+name: Olivero Subtheme
+type: theme
+description: A simple subtheme of the core Olivero theme
+core_version_requirement: ^8 || ^9 || ^10
+# Defines the base theme
+base theme: olivero
+# Defines libraries group in which we can add CSS/JS.
+libraries:
+  - olivero_subtheme/global
+
+ckeditor5-stylesheets:
+  - css/cke5-styles.css

@@ -2,7 +2,7 @@ _core:
   default_config_hash: VDJxTZtQR21qB4lvOq8zszJZLvLKrSPQpdn2E3T71Ww
 langcode: en
 uuid: ec1b82bf-bca6-4627-a0af-c12b4d819c73
-name: 'Drush Site-Install'
+name: 'CKEditor 5 Sandbox Site'
 mail: admin@example.com
 slogan: ''
 page:
