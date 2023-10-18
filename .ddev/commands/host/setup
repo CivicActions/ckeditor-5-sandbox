@@ -10,7 +10,7 @@ ddev import-db -f ckeditor-5-sandbox.sql.gz
 echo "=== Composer install:"
 ddev composer install
 ddev drush cr
-ddev drush updb -ycd
+ddev drush updb -y
 ddev drush cr
 
 echo "=== Import config:"
