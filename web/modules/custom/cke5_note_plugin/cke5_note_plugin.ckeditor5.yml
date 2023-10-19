@@ -36,12 +36,8 @@ cke5_note_plugin_note:
       # Note that it necessary for elements to separately provide both the tag
       # (f.e. `<h2>`) and the attribute being added to the tag
       # (f.e. `<h2 class="note-title">`).
-      - <h2>
-      - <h2 class="note-title">
       - <div>
-      - <div class="note-description">
-      - <section>
-      - <section class="note">
+      - <div class="ds-c-alert ds-c-alert__body ds-c-alert__heading ds-c-alert__text">
     # *Additional configuration properties*
     # conditions: for setting additional criteria that must be met for the
     #   plugin to be active.
