@@ -66,8 +66,9 @@ function cke5_tooltip_plugin_preprocess_field(&$variables) {
  * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
  */
 function _cke5_tooltip_plugin_format_tooltip(array $data, $rich_text) {
+  $tid = $data['id'];
   /** @var Drupal\node\Entity\Node $tooltip */
-  $tooltip = Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($data['id']);
+  $tooltip = Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
   if ($tooltip) {
     $view_builder = \Drupal::entityTypeManager()->getViewBuilder('taxonomy_term');
     $pre_render = $view_builder->view($tooltip, 'tooltip');
@@ -79,9 +80,9 @@ function _cke5_tooltip_plugin_format_tooltip(array $data, $rich_text) {
     // Tags in the trigger text don't render properly in the component.
     $tooltip_trigger = strip_tags($data['tooltip_text']);
     $pre_react = <<<EOT
-<a data-content="$tooltip_body" class="ds-c-tooltip__trigger-link">
+<span class="tooltip" data-tooltip-id="$tid" data-content="$tooltip_body">
     $tooltip_trigger
-</a>
+</span>
 EOT;
   } else {
     $pre_react = strip_tags($data['tooltip_text']);
@@ -89,7 +90,7 @@ EOT;
 
   // Matches an anchor with class, 'ds-c-tooltip__trigger-link', and expected
   // data-tooltip-id.
-  $tooltip_match = '/<a class="ds-c-tooltip__trigger-link.*?" data-tooltip-id="' . $data['id'] . '".*?>.*?<\/a>/';
+  $tooltip_match = '/<a class="ds-c-tooltip__trigger-link.*?" data-tooltip-id="' . $tid . '".*?>.*?<\/a>/';
 
   // Limit this replacement to just 1, so that we don't replace multiple
   // tooltips if the same one is used multiple times.
