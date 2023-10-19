@@ -17,10 +17,12 @@ import InsertNoteCommand from './insertnotecommand';
  * </note>
  *
  * Which is converted for the browser/user as this markup
- * <section class="note">
- *   <h2 class="note-title"></h1>
- *   <div class="note-description"></div>
- * </section>
+ * <div class="ds-c-alert">
+ *   <div class="ds-c-alert__body">
+ *     <div class="ds-c-alert__heading"></div>
+ *     <div class="ds-c-alert__text"></div>
+ *   </div>
+ * </div>
  *
  * This file has the logic for defining the note model, and for how it is
  * converted to standard DOM markup.
@@ -99,72 +101,120 @@ export default class NoteEditing extends Plugin {
 
     // Upcast Converters: determine how existing HTML is interpreted by the
     // editor. These trigger when an editor instance loads.
-    //
-    // If <section class="note"> is present in the existing markup
-    // processed by CKEditor, then CKEditor recognizes and loads it as a
-    // <note> model.
-    conversion.for('upcast').elementToElement({
-      model: 'note',
-      view: {
-        name: 'section',
-        classes: 'note',
-      },
+    conversion.for('upcast').add( dispatcher => {
+      // Look for every view div element.
+      dispatcher.on( 'element:div', ( evt, data, conversionApi ) => {
+        // Get all the necessary items from the conversion API object.
+        const {
+          consumable,
+          writer,
+          safeInsert,
+          convertChildren,
+          updateConversionResult
+        } = conversionApi;
+
+        // Get view item from data object.
+        const { viewItem } = data;
+
+        // Define elements consumables.
+        const wrapper = { name: true, classes: 'ds-c-alert' };
+        const innerWrapper = { name: true, classes: 'ds-c-alert__body'};
+
+        // Tests if the view element can be consumed.
+        if ( !consumable.test( viewItem, wrapper ) ) {
+          return;
+        }
+
+        // Check if there is only one child.
+        if ( viewItem.childCount !== 1 ) {
+          return;
+        }
+
+        // Get the first child element.
+        const firstChildItem = viewItem.getChild( 0 );
+
+        // Check if the first element is a div.
+        if ( !firstChildItem.is( 'element', 'div' ) ) {
+          return;
+        }
+
+        // Tests if the first child element can be consumeed.
+        if ( !consumable.test( firstChildItem, innerWrapper ) ) {
+          return;
+        }
+
+        // Create model element.
+        const modelElement = writer.createElement( 'note' );
+
+        // Insert element on a current cursor location.
+        if ( !safeInsert( modelElement, data.modelCursor ) ) {
+          return;
+        }
+
+        // Consume the main outer wrapper element.
+        consumable.consume( viewItem, wrapper );
+        // Consume the inner wrapper element.
+        consumable.consume( firstChildItem, wrapper );
+
+        // Handle children conversion inside the inner wrapper element.
+        convertChildren( firstChildItem, modelElement );
+
+        // Necessary function call to help setting model range and cursor
+        // for some specific cases when element being split.
+        updateConversionResult( modelElement, data );
+      } );
     });
 
-    // If <h2 class="note-title"> is present in the existing markup
+    // If <div class="ds-c-alert__heading"> is present in the existing markup
     // processed by CKEditor, then CKEditor recognizes and loads it as a
-    // <noteTitle> model, provided it is a child element of <note>,
-    // as required by the schema.
     conversion.for('upcast').elementToElement({
       model: 'noteTitle',
       view: {
-        name: 'h2',
-        classes: 'note-title',
+        name: 'div',
+        classes: 'ds-c-alert__heading',
       },
     });
 
-    // If <h2 class="note-description"> is present in the existing markup
+    // If <div class="ds-c-alert__text"> is present in the existing markup
     // processed by CKEditor, then CKEditor recognizes and loads it as a
-    // <noteDescription> model, provided it is a child element of
-    // <note>, as required by the schema.
     conversion.for('upcast').elementToElement({
       model: 'noteDescription',
       view: {
         name: 'div',
-        classes: 'note-description',
+        classes: 'ds-c-alert__text',
       },
     });
 
     // Data Downcast Converters: converts stored model data into HTML.
     // These trigger when content is saved.
-    //
-    // Instances of <note> are saved as
-    // <section class="note">{{inner content}}</section>.
-    conversion.for('dataDowncast').elementToElement({
+    conversion.for('dataDowncast').elementToStructure({
       model: 'note',
-      view: {
-        name: 'section',
-        classes: 'note',
-      },
+      view: ( modelElement, { writer } ) => {
+        return writer.createContainerElement( 'div', { class: 'ds-c-alert' }, [
+          writer.createContainerElement( 'div', { class: 'ds-c-alert__body' }, [
+            writer.createSlot()
+          ] )
+        ] );
+      }
     });
 
     // Instances of <noteTitle> are saved as
-    // <h2 class="note-title">{{inner content}}</h2>.
+    // <div class="ds-c-alert__heading">{{inner content}}</div>.
     conversion.for('dataDowncast').elementToElement({
       model: 'noteTitle',
       view: {
-        name: 'h2',
-        classes: 'note-title',
+        name: 'div',
+        classes: 'ds-c-alert__heading',
       },
     });
 
     // Instances of <noteDescription> are saved as
-    // <div class="note-description">{{inner content}}</div>.
+    // <div class="ds-c-alert__text">{{inner content}}</div>.
     conversion.for('dataDowncast').elementToElement({
       model: 'noteDescription',
       view: {
         name: 'div',
-        classes: 'note-description',
+        classes: 'ds-c-alert__text',
       },
     });
 
@@ -174,25 +224,27 @@ export default class NoteEditing extends Plugin {
     // are changes to any of the models' properties.
     //
     // Convert the <note> model into a container widget in the editor UI.
-    conversion.for('editingDowncast').elementToElement({
+    conversion.for('editingDowncast').elementToStructure({
       model: 'note',
-      view: (modelElement, { writer: viewWriter }) => {
-        const section = viewWriter.createContainerElement('section', {
-          class: 'note',
-        });
+      view: ( modelElement, { writer: viewWriter }) => {
+        const div = viewWriter.createContainerElement('div', { class: 'ds-c-alert' }, [
+          viewWriter.createContainerElement( 'div', { class: 'ds-c-alert__body' }, [
+            viewWriter.createSlot()
+          ] )
+        ] );
 
-        return toWidget(section, viewWriter, { label: 'note widget' });
+        return toWidget( div, viewWriter, { label: 'note widget' });
       },
     });
 
-    // Convert the <noteTitle> model into an editable <h2> widget.
+    // Convert the <noteTitle> model into an editable <div> widget.
     conversion.for('editingDowncast').elementToElement({
       model: 'noteTitle',
       view: (modelElement, { writer: viewWriter }) => {
-        const h2 = viewWriter.createEditableElement('h2', {
-          class: 'note-title',
+        const div = viewWriter.createEditableElement('div', {
+          class: 'ds-c-alert__heading',
         });
-        return toWidgetEditable(h2, viewWriter);
+        return toWidgetEditable(div, viewWriter);
       },
     });
 
@@ -201,7 +253,7 @@ export default class NoteEditing extends Plugin {
       model: 'noteDescription',
       view: (modelElement, { writer: viewWriter }) => {
         const div = viewWriter.createEditableElement('div', {
-          class: 'note-description',
+          class: 'ds-c-alert__text',
         });
         return toWidgetEditable(div, viewWriter);
       },
