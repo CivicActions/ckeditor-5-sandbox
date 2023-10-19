@@ -4,10 +4,17 @@
 ## Usage: setup
 ## Example: setup
 
+echo "=== Import DB:"
+ddev import-db -f ckeditor-5-sandbox.sql.gz
+
 echo "=== Composer install:"
 ddev composer install
+ddev drush cr
+ddev drush updb -y
 ddev drush cr
 
 echo "=== Import config:"
 ddev drush cim -y
+ddev drush cr
+ddev drush deploy:hook -y
 ddev drush cr
