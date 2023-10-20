@@ -3,7 +3,7 @@
 
 note:
   js:
-    js/build/note.js: { preprocess: false, minified: true }
+    js/build/notePlugin.js: { preprocess: false, minified: true }
   dependencies:
     - core/ckeditor5
 

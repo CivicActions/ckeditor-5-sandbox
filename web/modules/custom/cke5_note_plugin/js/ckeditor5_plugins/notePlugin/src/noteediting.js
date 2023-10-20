@@ -60,6 +60,7 @@ export default class NoteEditing extends Plugin {
       isObject: true,
       // Allow in places where other blocks are allowed (e.g. directly in the root).
       allowWhere: '$block',
+      allowAttributes: 'class',
     });
 
     schema.register('noteTitle', {
@@ -165,9 +166,17 @@ export default class NoteEditing extends Plugin {
       } );
     });
 
+    conversion.for('upcast').elementToElement( {
+      model: 'note',
+      view: {
+        name: 'div',
+        attributes: [ 'class' ]
+      }
+    } );
+
     // If <div class="ds-c-alert__heading"> is present in the existing markup
     // processed by CKEditor, then CKEditor recognizes and loads it as a
-    conversion.for('upcast').elementToElement({
+    conversion.for('upcast').elementToElement( {
       model: 'noteTitle',
       view: {
         name: 'div',
@@ -177,7 +186,7 @@ export default class NoteEditing extends Plugin {
 
     // If <div class="ds-c-alert__text"> is present in the existing markup
     // processed by CKEditor, then CKEditor recognizes and loads it as a
-    conversion.for('upcast').elementToElement({
+    conversion.for('upcast').elementToElement( {
       model: 'noteDescription',
       view: {
         name: 'div',
@@ -185,19 +194,37 @@ export default class NoteEditing extends Plugin {
       },
     });
 
+    conversion.for('upcast').attributeToAttribute( {
+      model: {
+        name: 'note',
+        key: 'class'
+      },
+      view: 'class'
+    })
+
+    conversion.for('downcast').elementToStructure( {
+      model: {
+        name: 'note',
+        attributes: [ 'class' ]
+      },
+      view: ( modelElement, { writer } ) => {
+        const div = writer.createContainerElement(
+          'div', {
+            class: modelElement.getAttribute( 'class' )
+          }, [
+            writer.createContainerElement(
+              'div', {
+                class: 'ds-c-alert__body'
+              }, [
+                writer.createSlot()
+              ] )
+          ] );
+        return toWidget( div, writer );
+      }
+    } );
+
     // Data Downcast Converters: converts stored model data into HTML.
     // These trigger when content is saved.
-    conversion.for('dataDowncast').elementToStructure({
-      model: 'note',
-      view: ( modelElement, { writer } ) => {
-        return writer.createContainerElement( 'div', { class: 'ds-c-alert' }, [
-          writer.createContainerElement( 'div', { class: 'ds-c-alert__body' }, [
-            writer.createSlot()
-          ] )
-        ] );
-      }
-    });
-
     // Instances of <noteTitle> are saved as
     // <div class="ds-c-alert__heading">{{inner content}}</div>.
     conversion.for('dataDowncast').elementToElement({
@@ -223,19 +250,6 @@ export default class NoteEditing extends Plugin {
     // after the Data Upcast Converters, and are re-triggered any time there
     // are changes to any of the models' properties.
     //
-    // Convert the <note> model into a container widget in the editor UI.
-    conversion.for('editingDowncast').elementToStructure({
-      model: 'note',
-      view: ( modelElement, { writer: viewWriter }) => {
-        const div = viewWriter.createContainerElement('div', { class: 'ds-c-alert' }, [
-          viewWriter.createContainerElement( 'div', { class: 'ds-c-alert__body' }, [
-            viewWriter.createSlot()
-          ] )
-        ] );
-
-        return toWidget( div, viewWriter, { label: 'note widget' });
-      },
-    });
 
     // Convert the <noteTitle> model into an editable <div> widget.
     conversion.for('editingDowncast').elementToElement({

@@ -7,14 +7,14 @@
 import { Command } from 'ckeditor5/src/core';
 
 export default class InsertNoteCommand extends Command {
-  execute() {
+  execute( { color } ) {
     const { model } = this.editor;
 
-    model.change((writer) => {
+    model.change( ( writer ) => {
       // Insert <note>*</note> at the current selection position
       // in a way that will result in creating a valid model structure.
-      model.insertContent(createNote(writer));
-    });
+      model.insertContent( createNote( writer, color ) );
+    } );
   }
 
   refresh() {
@@ -35,21 +35,22 @@ export default class InsertNoteCommand extends Command {
   }
 }
 
-function createNote(writer) {
+function createNote( writer, color ) {
   // Create instances of the three elements registered with the editor in
   // noteediting.js.
-  const note = writer.createElement('note');
-  const noteTitle = writer.createElement('noteTitle');
-  const noteDescription = writer.createElement('noteDescription');
+  const note = writer.createElement( 'note' );
+  writer.setAttribute( 'class', 'ds-c-alert ' + color, note );
+  const noteTitle = writer.createElement( 'noteTitle' );
+  const noteDescription = writer.createElement( 'noteDescription' );
 
   // Append the title and description elements to the note, which matches
   // the parent/child relationship as defined in their schemas.
-  writer.append(noteTitle, note);
-  writer.append(noteDescription, note);
+  writer.append( noteTitle, note );
+  writer.append( noteDescription, note );
 
   // The noteDescription text content will automatically be wrapped in a
   // `<p>`.
-  writer.appendElement('paragraph', noteDescription);
+  writer.appendElement( 'paragraph', noteDescription );
 
   // Return the element to be added to the editor.
   return note;
