@@ -14,15 +14,9 @@ filters:
     status: true
     weight: -10
     settings:
-      allowed_html: '<a class="ds-c-tooltip__trigger-link ds-c-help-drawer__toggle ds-u-display--inline" data-tooltip-id href data-drawer-id title data-toggle data-content> <span class data-content data-error-type data-title data-tooltip-id data-drawer-id data-heading> <br> <p> <h2> <h3> <h4> <h5> <h6> <strong> <em> <s> <sub> <sup> <blockquote> <ul> <ol> <li> <hr> <table> <tr> <td rowspan colspan> <th rowspan colspan> <thead> <tbody> <tfoot> <caption>'
+      allowed_html: '<a class="ds-c-help-drawer__toggle ds-u-display--inline ds-c-tooltip__trigger-link" data-drawer-id title data-toggle data-content data-tooltip-id href> <span class data-drawer-id data-content data-title data-error-type data-tooltip-id> <br> <p> <h2> <h3> <h4> <h5> <h6> <strong> <em> <s> <sub> <sup> <blockquote> <ul> <ol> <li> <hr> <table> <tr> <td rowspan colspan> <th rowspan colspan> <thead> <tbody> <tfoot> <caption>'
       filter_html_help: false
       filter_html_nofollow: false
-  filter_autop:
-    id: filter_autop
-    provider: filter
-    status: true
-    weight: 0
-    settings: {  }
   filter_url:
     id: filter_url
     provider: filter
