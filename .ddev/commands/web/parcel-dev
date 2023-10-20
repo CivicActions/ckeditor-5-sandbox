@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-## Description: Starts Parcel development server.
-## Usage: parcel-dev
-## Example: ddev parcel-dev
-
-echo "=== Starting Parcel development server:"
-npm --prefix /var/www/html/web/themes/custom/olivero_subtheme/react-components run dev
