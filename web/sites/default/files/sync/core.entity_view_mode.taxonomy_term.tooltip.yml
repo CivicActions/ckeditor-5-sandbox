@@ -1,0 +1,10 @@
+uuid: 4847db20-eb08-43ce-a6fc-ce6a3d8b46f4
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: taxonomy_term.tooltip
+label: Tooltip
+targetEntityType: taxonomy_term
+cache: true

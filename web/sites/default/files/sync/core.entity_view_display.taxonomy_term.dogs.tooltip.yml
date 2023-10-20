@@ -1,0 +1,26 @@
+uuid: bfd2ff91-e2cb-41b5-846a-1f265315a1b4
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.tooltip
+    - field.field.taxonomy_term.dogs.field_breed_summary
+    - field.field.taxonomy_term.dogs.field_overview
+    - taxonomy.vocabulary.dogs
+  module:
+    - text
+id: taxonomy_term.dogs.tooltip
+targetEntityType: taxonomy_term
+bundle: dogs
+mode: tooltip
+content:
+  field_breed_summary:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  description: true
+  field_overview: true

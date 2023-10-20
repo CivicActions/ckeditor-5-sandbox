@@ -1,0 +1,24 @@
+uuid: c104fc31-39e7-4429-bc66-d8ebea508fba
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_overview
+    - filter.format.restricted_html
+    - taxonomy.vocabulary.dogs
+  module:
+    - text
+id: taxonomy_term.dogs.field_overview
+field_name: field_overview
+entity_type: taxonomy_term
+bundle: dogs
+label: Overview
+description: 'Provide a full overview of this breed.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - restricted_html
+field_type: text_long
