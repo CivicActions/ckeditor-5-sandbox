@@ -51,6 +51,7 @@ function createNote( writer, type ) {
   // The noteDescription text content will automatically be wrapped in a
   // `<p>`.
   writer.appendElement( 'paragraph', noteDescription );
+  writer.appendElement( 'paragraph', noteTitle);
 
   // Return the element to be added to the editor.
   return note;

@@ -166,14 +166,6 @@ export default class NoteEditing extends Plugin {
       } );
     });
 
-    conversion.for('upcast').elementToElement( {
-      model: 'note',
-      view: {
-        name: 'div',
-        attributes: [ 'class' ]
-      }
-    } );
-
     // If <div class="ds-c-alert__heading"> is present in the existing markup
     // processed by CKEditor, then CKEditor recognizes and loads it as a
     conversion.for('upcast').elementToElement( {
