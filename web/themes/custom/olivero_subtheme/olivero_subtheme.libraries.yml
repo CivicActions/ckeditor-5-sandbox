@@ -13,16 +13,22 @@ react-components.shared:
 
 react-components.help-drawer:
   version: VERSION
-  js:
-    react-components/build/help-drawer/help-drawer.bundle.js: { attributes: { type: module } }
   css:
     component:
       react-components/build/help-drawer/help-drawer.bundle.css: {}
+      components/help-drawer/help-drawer.css: {}
+  js:
+    react-components/build/help-drawer/help-drawer.bundle.js: { attributes: { type: module } }
+  dependencies:
+    - olivero_subtheme/react-components.shared
 
 react-components.tooltip:
   version: VERSION
-  js:
-    react-components/build/tooltip/tooltip.bundle.js: { attributes: { type: module } }
   css:
     component:
       react-components/build/tooltip/tooltip.bundle.css: {}
+      components/tooltip/tooltip.css: {}
+  js:
+    react-components/build/tooltip/tooltip.bundle.js: { attributes: { type: module } }
+  dependencies:
+    - olivero_subtheme/react-components.shared
