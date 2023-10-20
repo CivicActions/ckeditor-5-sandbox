@@ -44,7 +44,7 @@ export default class NoteUI extends Plugin {
     this.listenTo( formView.noteTypeSelectorView, 'execute', (eventInfo ) => {
       const { id } = eventInfo.source;
       const value = {
-        color: id
+        type: id
       };
       editor.execute( 'insertNote', value );
 

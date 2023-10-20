@@ -13,7 +13,7 @@ export default class InsertNoteCommand extends Command {
     model.change( ( writer ) => {
       // Insert <note>*</note> at the current selection position
       // in a way that will result in creating a valid model structure.
-      model.insertContent( createNote( writer, type ) );
+      model.insertContent( createNote( writer, type ?? '' ) );
     } );
   }
 
