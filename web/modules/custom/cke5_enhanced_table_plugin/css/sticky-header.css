@@ -1,0 +1,26 @@
+table.cke5-sticky-enabled {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+}
+
+table.cke5-sticky-enabled th,
+table.cke5-sticky-enabled td {
+  border-bottom: 0;
+  border-right: 0;
+}
+
+table.cke5-sticky-enabled th:not([scope=row]) {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+table.cke5-sticky-enabled th[scope=row] {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}

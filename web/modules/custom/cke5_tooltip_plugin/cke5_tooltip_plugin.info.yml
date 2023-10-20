@@ -2,7 +2,7 @@ name: CKEditor 5 Tooltip Plugin
 type: module
 description: This module provides a custom CKEditor 5 plugin for tooltips
 core_version_requirement: ^10
-package: CKEditor 5 Custom Plugins
+package: CKE5 Custom Plugins
 dependencies:
   - drupal:editor
   - drupal:ckeditor5
