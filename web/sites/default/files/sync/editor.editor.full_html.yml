@@ -35,6 +35,8 @@ settings:
       - '|'
       - helpDrawer
       - '|'
+      - note
+      - '|'
       - sourceEditing
   plugins:
     ckeditor5_heading:
