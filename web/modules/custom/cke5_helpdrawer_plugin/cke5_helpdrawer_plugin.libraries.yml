@@ -1,0 +1,14 @@
+helpdrawer:
+  js:
+    js/build/helpdrawerPlugin.js: { preprocess: false, minified: true }
+  dependencies:
+    - core/ckeditor5
+    - core/jquery
+    - core/drupal.ajax
+    - core/drupal.autocomplete
+    - core/once
+
+helpdrawer.admin:
+  css:
+    theme:
+      css/helpdrawer.admin.css: { }

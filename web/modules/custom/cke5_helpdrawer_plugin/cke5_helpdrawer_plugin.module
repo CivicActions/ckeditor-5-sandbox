@@ -1,0 +1,178 @@
+<?php
+
+/**
+ * @file
+ * CKE5 help drawer custom link processing.
+ */
+
+use Drupal\Component\Utility\Html;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ *
+ * @see hook_help()
+ */
+function cke5_helpdrawer_plugin_help($route_name, RouteMatchInterface $route_match) {
+
+  switch ($route_name) {
+
+    case 'help.page.cke5_helpdrawer_plugin':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' .
+          t('The CKE5 Help Drawer Plugin Module provides a custom 
+             CKEditor 5 plugin allowing content creators the ability to
+             create references to taxonomy terms of a specific
+             vocabulary. ') .
+            '</p>';
+      $output .= '<p>' .
+          t('Using the <img src=":cke5button" height="20" width="20"> button
+             from the CKEditor 5 toolbar, a content creator can create a
+             reference to the desired taxonomy term and specify a title
+             that, when clicked in presentation, will trigger the opening of
+             the Help Drawer content.',
+            [
+              ':cke5button' => '/modules/custom/cke5_helpdrawer_plugin/icons/noun_slide_out.svg',
+            ]) .
+            '</p>';
+      $output .= '<h3>' . t('Developer References') . '</h3>';
+      $output .= '<dl>';
+      $output .= '<dt>' . t('CKE5 Help Drawer Plugin Module') . '</dt>';
+      $output .= '<dd>' .
+        t('Please refer to the README.md file located in the root of the
+           cke5_helpdrawer_plugin module for more details.') .
+          '</dd>';
+      $output .= '<dt>' . t('CKEditor 5 Dev Tools') . '</dt>';
+      $output .= '<dd>' .
+          t('The <a href=":cke5dev">ckeditor5_dev</a> module provides an
+             inspector tool and a plugin template to assist with the
+             development of custom CKEditor 5 plugins.',
+            [
+              ':cke5dev' => 'https://www.drupal.org/project/ckeditor5_dev',
+            ]) .
+          '</dd>';
+      $output .= '<dt>' . t('CKEditor Ecosystem Documentation') . '</dt>';
+      $output .= '<dd>' .
+          t('The <a href=":ckeeco">CKEditor Ecosystem Documentation site</a>
+            provides an overview of the CKEditor 5 framework and resources for
+            developing CKEditor 5 custom plugins.',
+            [
+              ':ckeeco' => 'https://ckeditor.com/docs/ckeditor5/latest/framework/plugins/creating-simple-plugin-timestamp.html',
+            ]) .
+          '</dd>';
+      $output .= '</dl>';
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function cke5_helpdrawer_plugin_preprocess_field(&$variables) {
+  $field_types = [
+    'text_with_summary',
+    'text_long',
+  ];
+  if (in_array($variables['field_type'], $field_types)) {
+    $variables['help_drawers'] = '';
+
+    foreach ($variables['items'] as &$item) {
+      if ($item['content']['#format'] === 'plain_text') {
+        continue;
+      }
+
+      /*
+       * $drawer_trigger_pattern looks for anchors with class,
+       * 'ds-c-help-drawer__toggle' and a 'data-drawer-id' attribute with a
+       * numeric value. If it finds them, it saves the contents of
+       * `data-drawer-id`, and the tag contents.
+       */
+      $text = $item['content']['#text'];
+      $drawer_trigger_pattern = '/<a class="ds-c-help-drawer__toggle.*?" data-drawer-id="(?P<id>\d+)".*?>(?P<text>.*?)<\/a>/';
+
+      if (preg_match_all($drawer_trigger_pattern, $item['content']['#text'], $matches, PREG_SET_ORDER)) {
+        try {
+          if (count($matches) > 1 && is_array($matches[0])) {
+            foreach ($matches as $match) {
+              $text = _cke5_helpdrawer_plugin_format_drawer($match, $text);
+            }
+          }
+          else {
+            $text = _cke5_helpdrawer_plugin_format_drawer($matches[0], $text);
+          }
+
+          $item['content']['#text'] = $text;
+        }
+        catch (Exception $exception) {
+          Drupal::logger('cke5_helpdrawer_plugin')
+            ->error(
+              'Error trying to create help drawer: %error',
+              ['%error' => $exception->getMessage()]
+            );
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Replaces help drawer toggles in html in a React-friendly format.
+ *
+ * @param array $data
+ *   Array, ['id' => help drawer nid, 'text' => toggle text], used to populate
+ *   replacement.
+ * @param string $rich_text
+ *   The text to do replacement on.
+ *
+ * @return string|null
+ *   The contents of $rich_text with replacement.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ */
+function _cke5_helpdrawer_plugin_format_drawer(array $data, $rich_text) {
+  $tid = $data['id'];
+  $drawer = Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
+  $toggle_text = strip_tags(trim($data['text']));
+  if ($drawer) {
+    // Set the term as the heading title.
+    $term_name = $drawer->get('name')->getValue();
+    if (!empty($term_name[0]['value'])) {
+      $drawer_heading = $term_name[0]['value'];
+    }
+    // Get the rendered help drawer term in the 'drawer'
+    // view mode.
+    $view_builder = \Drupal::entityTypeManager()->getViewBuilder('taxonomy_term');
+    $pre_render = $view_builder->view($drawer, 'help_drawer');
+    $rendered_drawer = \Drupal::service('renderer')->render($pre_render);
+    // Replace '$' with '&dollar;' in the rendered help drawer, otherwise if
+    // there's a digit following it, the later preg_replace will treat it like
+    // a backreference (probably with a value of 'null' unless you have $0)
+    $drawer_content = Html::escape(trim(str_replace('$', '&dollar;', $rendered_drawer)));
+
+    // Output the drawer text as a span with a data attributes that contain
+    // the term id, drawer heading, and drawer content (with HTML escaped.)
+    // See: /themes/custom/olivero_subtheme/react-components/src/help-drawer
+    // for related React component.
+    $pre_react = <<<EOT
+      <span class="help-drawer" data-drawer-id="$tid" data-title="$drawer_heading" data-content="$drawer_content">
+        $toggle_text
+      </span>
+    EOT;
+  }
+  else {
+    // If no term was found, output a span with data attributes identifying
+    // an error, and the term id.
+    $pre_react = <<<EOT
+      <span data-error-type="helpdrawer" data-drawer-id="$tid">
+        $toggle_text
+      </span>
+    EOT;
+  }
+
+  // Matches an anchor with class, 'ds-c-help-drawer__toggle', and expected
+  // data-drawer-id.
+  $toggle_match = '/<a class="ds-c-help-drawer__toggle.*?" data-drawer-id="' . $data['id'] . '".*?>.*?<\/a>/';
+  return preg_replace($toggle_match, $pre_react, $rich_text, 1);
+}
