@@ -1,0 +1,31 @@
+uuid: f006bcfb-f6bf-47d4-aeb2-574a0acd80d1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.dogs.field_breed_summary
+    - field.field.taxonomy_term.dogs.field_overview
+    - taxonomy.vocabulary.dogs
+  module:
+    - text
+id: taxonomy_term.dogs.default
+targetEntityType: taxonomy_term
+bundle: dogs
+mode: default
+content:
+  field_breed_summary:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_overview:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  description: true

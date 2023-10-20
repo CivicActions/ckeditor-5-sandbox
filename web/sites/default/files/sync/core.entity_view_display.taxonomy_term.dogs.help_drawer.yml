@@ -1,0 +1,26 @@
+uuid: 17b1ea2b-4661-45ec-984f-ebd3be8d8793
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.help_drawer
+    - field.field.taxonomy_term.dogs.field_breed_summary
+    - field.field.taxonomy_term.dogs.field_overview
+    - taxonomy.vocabulary.dogs
+  module:
+    - text
+id: taxonomy_term.dogs.help_drawer
+targetEntityType: taxonomy_term
+bundle: dogs
+mode: help_drawer
+content:
+  field_overview:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  description: true
+  field_breed_summary: true

@@ -1,0 +1,18 @@
+cke5_helpdrawer_plugin_helpdrawer:
+  ckeditor5:
+    plugins:
+      - helpdrawerPlugin.HelpDrawer
+  drupal:
+    label: Help Drawer
+    library: cke5_helpdrawer_plugin/helpdrawer
+    admin_library: cke5_helpdrawer_plugin/helpdrawer.admin
+    toolbar_items:
+      helpDrawer:
+        label: Help Drawer
+    elements:
+      - <a class="ds-c-help-drawer__toggle ds-u-display--inline" data-drawer-id title data-toggle data-content>
+      - <span>
+      - <span class="help-drawer" data-drawer-id data-content data-title>
+    conditions:
+      plugins:
+        - ckeditor5_link

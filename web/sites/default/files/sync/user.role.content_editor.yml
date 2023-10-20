@@ -3,13 +3,17 @@ langcode: en
 status: true
 dependencies:
   config:
+    - filter.format.basic_html
+    - filter.format.restricted_html
     - node.type.article
     - node.type.page
+    - taxonomy.vocabulary.dogs
     - taxonomy.vocabulary.tags
   module:
     - comment
     - contextual
     - file
+    - filter
     - node
     - path
     - system
@@ -32,6 +36,7 @@ permissions:
   - 'administer url aliases'
   - 'create article content'
   - 'create page content'
+  - 'create terms in dogs'
   - 'create terms in tags'
   - 'create url aliases'
   - 'delete article revisions'
@@ -39,11 +44,15 @@ permissions:
   - 'delete own files'
   - 'delete own page content'
   - 'delete page revisions'
+  - 'delete terms in dogs'
   - 'edit own article content'
   - 'edit own comments'
   - 'edit own page content'
+  - 'edit terms in dogs'
   - 'edit terms in tags'
   - 'revert all revisions'
+  - 'use text format basic_html'
+  - 'use text format restricted_html'
   - 'view all revisions'
   - 'view own unpublished content'
   - 'view the administration theme'

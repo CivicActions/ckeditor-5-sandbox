@@ -1,0 +1,7 @@
+cke5_help_drawer.autocomplete:
+  path: '/admin/cke5_helpdrawer_plugin/helpdrawer/autocomplete'
+  defaults:
+    _controller: '\Drupal\cke5_helpdrawer_plugin\Controller\HelpDrawerController::handleAutocomplete'
+    _format: json
+  requirements:
+    _access: 'TRUE'

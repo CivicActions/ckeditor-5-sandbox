@@ -1,0 +1,24 @@
+uuid: f7b6a66e-25fe-485f-9d50-f26aa2dda6af
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_breed_summary
+    - filter.format.basic_html
+    - taxonomy.vocabulary.dogs
+  module:
+    - text
+id: taxonomy_term.dogs.field_breed_summary
+field_name: field_breed_summary
+entity_type: taxonomy_term
+bundle: dogs
+label: 'Breed Summary'
+description: 'Provide a short summary of this dog breed. '
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - basic_html
+field_type: text_long

@@ -1,0 +1,10 @@
+uuid: bd8fb8ed-8c13-426a-a4a5-f7561cb295f2
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: taxonomy_term.help_drawer
+label: 'Help Drawer'
+targetEntityType: taxonomy_term
+cache: true

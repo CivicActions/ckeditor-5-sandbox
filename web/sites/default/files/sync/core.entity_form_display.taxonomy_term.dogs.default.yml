@@ -1,0 +1,55 @@
+uuid: 3b27ccfa-e5d8-4ad2-9e13-dc330466490c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.dogs.field_breed_summary
+    - field.field.taxonomy_term.dogs.field_overview
+    - taxonomy.vocabulary.dogs
+  module:
+    - path
+    - text
+id: taxonomy_term.dogs.default
+targetEntityType: taxonomy_term
+bundle: dogs
+mode: default
+content:
+  field_breed_summary:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_overview:
+    type: text_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 4
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden:
+  description: true
