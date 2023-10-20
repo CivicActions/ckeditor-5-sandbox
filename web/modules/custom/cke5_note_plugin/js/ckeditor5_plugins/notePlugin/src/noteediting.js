@@ -72,7 +72,7 @@ export default class NoteEditing extends Plugin {
       // This is only to be used within note.
       allowIn: 'note',
       // Allow content that is allowed in blocks (e.g. text with attributes).
-      allowContentOf: '$block',
+      allowContentOf: '$root',
     });
 
     schema.register('noteDescription', {

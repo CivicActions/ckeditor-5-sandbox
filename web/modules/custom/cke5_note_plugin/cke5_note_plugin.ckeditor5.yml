@@ -37,7 +37,7 @@ cke5_note_plugin_note:
       # (f.e. `<h2>`) and the attribute being added to the tag
       # (f.e. `<h2 class="note-title">`).
       - <div>
-      - <div class="ds-c-alert ds-c-alert__body ds-c-alert__heading ds-c-alert__text note-blue note-gray note-yellow">
+      - <div class="ds-c-alert ds-c-alert__body ds-c-alert__heading ds-c-alert__text ds-c-alert--warn ds-c-alert--success">
     # *Additional configuration properties*
     # conditions: for setting additional criteria that must be met for the
     #   plugin to be active.
