@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { decode } from 'html-entities';
-import parse from 'html-react-parser';
+import HTMLReactParser from 'html-react-parser';
 import HelpDrawerToggle from '@cmsgov/design-system/dist/react-components/esm/HelpDrawer/HelpDrawerToggle';
 import HelpDrawer from '@cmsgov/design-system/dist/react-components/esm/HelpDrawer/HelpDrawer';
 import Tooltip from '@cmsgov/design-system/dist/react-components/esm/Tooltip/Tooltip';
@@ -32,8 +32,9 @@ function DSHelpDrawer({toggle, drawer_heading, drawer_content}) {
               className={'ds-c-tooltip__trigger-link'}
               component="button"
               placement="auto"
-              title={parse(decode(attribs['data-content']))}>
-              {parse(children[0]['data'])}
+              title={HTMLReactParser(attribs['data-content'])}
+            >
+              {HTMLReactParser(children[0]['data'])}
             </Tooltip>
           </span>
         )
@@ -58,7 +59,7 @@ function DSHelpDrawer({toggle, drawer_heading, drawer_content}) {
           hasFocusTrap={true}
           headingLevel={2}
         >
-        {parse(decode(drawer_content), options)}
+        {HTMLReactParser(decode(drawer_content), options)}
         </HelpDrawer>
       }
     </>

@@ -1,5 +1,5 @@
 import { render } from 'react-dom';
-import parse from 'html-react-parser';
+import HTMLReactParser from 'html-react-parser';
 import { decode } from 'html-entities';
 import Tooltip from '@cmsgov/design-system/dist/react-components/esm/Tooltip/Tooltip';
 import './tooltip.scss';
@@ -14,7 +14,7 @@ tooltips.forEach((item) => {
       className={'ds-c-tooltip__trigger-link'}
       component="button"
       placement="auto"
-      title={parse(decode(content))}
+      title={HTMLReactParser(decode(content))}
     >
       {trigger}
     </Tooltip>,
