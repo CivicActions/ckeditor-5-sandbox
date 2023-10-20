@@ -41,7 +41,7 @@ export default class NoteUI extends Plugin {
     const editor = this.editor;
     const formView = new NoteView( editor.locale );
 
-    this.listenTo( formView.noteColorSelectorView, 'execute', ( eventInfo ) => {
+    this.listenTo( formView.noteTypeSelectorView, 'execute', (eventInfo ) => {
       const { id } = eventInfo.source;
       const value = {
         color: id

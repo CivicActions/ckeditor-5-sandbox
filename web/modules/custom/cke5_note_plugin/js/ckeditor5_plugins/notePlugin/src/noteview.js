@@ -25,14 +25,14 @@ export default class NoteView extends View {
 
     this.formHeader = new FormHeaderView( locale, { 'label': t( 'Add Note' ) } );
 
-    this.noteColorSelectorView = this._createDropdown( locale, t( 'Select a note color' ) );
+    this.noteTypeSelectorView = this._createDropdown( locale, t( 'Select a type:' ) );
 
     this.saveButtonView = this._createButton( t( 'Save' ), icons.check, 'ck-button-save' );
     this.saveButtonView.type = 'submit';
 
     this.childViews = this.createCollection( [
       this.formHeader,
-      this.noteColorSelectorView,
+      this.noteTypeSelectorView,
       this.saveButtonView
     ] );
 
@@ -99,33 +99,33 @@ export default class NoteView extends View {
       }
     } );
 
-    const colors = new Collection();
+    const type = new Collection();
 
-    colors.add( {
+    type.add( {
       type: 'button',
       model: new Model( {
-        id: 'note-blue',
+        id: '',
         withText: true,
-        label: t( 'Blue' )
+        label: t( 'Informational' )
       } )
     } );
-    colors.add( {
+    type.add( {
       type: 'button',
       model: new Model( {
-        id: 'note-gray',
+        id: 'ds-c-alert--warn',
         withText: true,
-        label: t( 'Gray' )
+        label: t( 'Warning' )
       } )
     } );
-    colors.add( {
+    type.add( {
       type: 'button',
       model: new Model( {
-        id: 'note-yellow',
+        id: 'ds-c-alert--success',
         withText: true,
-        label: t( 'Yellow' )
+        label: t( 'Success' )
       } )
     } );
-    addListToDropdown( dropdown, colors );
+    addListToDropdown( dropdown, type );
 
     return dropdown;
   }

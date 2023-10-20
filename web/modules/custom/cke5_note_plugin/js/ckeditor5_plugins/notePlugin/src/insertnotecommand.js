@@ -7,13 +7,13 @@
 import { Command } from 'ckeditor5/src/core';
 
 export default class InsertNoteCommand extends Command {
-  execute( { color } ) {
+  execute( { type } ) {
     const { model } = this.editor;
 
     model.change( ( writer ) => {
       // Insert <note>*</note> at the current selection position
       // in a way that will result in creating a valid model structure.
-      model.insertContent( createNote( writer, color ) );
+      model.insertContent( createNote( writer, type ) );
     } );
   }
 
@@ -35,11 +35,11 @@ export default class InsertNoteCommand extends Command {
   }
 }
 
-function createNote( writer, color ) {
+function createNote( writer, type ) {
   // Create instances of the three elements registered with the editor in
   // noteediting.js.
   const note = writer.createElement( 'note' );
-  writer.setAttribute( 'class', 'ds-c-alert ' + color, note );
+  writer.setAttribute( 'class', 'ds-c-alert ' + type, note );
   const noteTitle = writer.createElement( 'noteTitle' );
   const noteDescription = writer.createElement( 'noteDescription' );
 
