@@ -1,4 +1,12 @@
-/* Additional tooltip styling. */
+/*
+  Additional tooltip styling for
+  demonstration purposes.
+  The primary styling for the tooltip
+  component is included with the React
+  scripts.
+  See: react-components/src/tooltip/
+*/
+
 .tooltip .ds-c-tooltip__content {
   font-size: 1rem;
   line-height: 1.3;

@@ -1,0 +1,130 @@
+/*
+  Styling for the alert component brought 
+  over from the CMS Design system for
+  demonstration purposes.
+*/
+.ds-c-alert {
+  background-color: var(--alert__background-color);
+  border-inline-start: var(--alert-bar__width) solid var(--alert__border-left-color);
+  color: var(--alert__font-color);
+  display: flex;
+  padding: var(--alert__padding);
+  margin: 2rem 0;
+}
+
+.text-content .ds-c-alert:first-child {
+  margin-top: 0;
+}
+
+.text-content .ds-c-alert:last-child {
+  margin-bottom: 0;
+}
+
+@media (-ms-high-contrast: active), (forced-colors: active) {
+  .ds-c-alert {
+    border: 1px solid windowText;
+    border-inline-start: var(--alert-bar__width) solid windowText;
+  }
+}
+
+.ds-c-alert.ds-alert--lightweight {
+  background-color: var(--alert__background-color--lightweight);
+}
+
+.ds-c-alert ul:last-child {
+  margin-block-end: 0;
+}
+
+.ds-c-alert ul:first-child {
+  margin-block-start: 0;
+}
+
+.ds-c-alert__a11y-label {
+  margin-inline-end: 0.5rem;
+}
+
+@media (-ms-high-contrast: active), (forced-colors: active) {
+  .ds-c-alert__a11y-label {
+    border: none !important;
+    clip: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    position: relative !important;
+    width: auto !important;
+    /* Workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=1241631 */
+    word-wrap: normal !important;
+  }
+}
+
+.ds-c-alert a:not(.ds-c-button),
+.ds-c-link {
+  color: var(--alert-link__font-color);
+}
+
+.ds-c-alert a:not(.ds-c-button):hover,
+.ds-c-link:hover {
+  color: var(--alert-link__font-color--hover);
+}
+
+.ds-c-alert a:not(.ds-c-button):focus,
+.ds-c-link:focus {
+  color: var(--alert-link__font-color--focus);
+}
+
+.ds-c-alert a:not(.ds-c-button):active,
+.ds-c-link:active {
+  color: var(--alert-link__font-color--active);
+}
+
+.ds-c-alert__header {
+  display: flex;
+}
+
+.ds-c-alert__icon {
+  flex-shrink: 0;
+  font-size: var(--font-size-lg);
+  margin-inline-start: 8px;
+}
+
+.ds-c-alert__body {
+  padding-inline-start: 16px;
+  flex: 1 0 calc(100% - 32px);
+}
+
+.ds-c-alert--hide-icon .ds-c-alert__body {
+  padding-inline-start: 0;
+}
+
+.ds-c-alert__heading,
+.ds-c-alert__heading > * {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  margin-block: 0 4px;
+}
+
+.ds-c-alert__text {
+  margin-block: 0;
+}
+
+/* CKEditor Specific Styling */
+.ck .ds-c-alert__heading.ck-editor__nested-editable,
+.ck .ds-c-alert__text.ck-editor__nested-editable {
+  background-color: var(--color-white);
+  border: 1px dotted  var(--color-gray-600);
+  padding: 2px 4px;
+}
+.ds-c-alert--error {
+  background-color: var(--alert__background-color--error);
+  border-color: var(--alert__border-color--error);
+}
+
+.ds-c-alert--warn {
+  background-color: var(--alert__background-color--warn);
+  border-color: var(--alert__border-color--warn);
+}
+
+.ds-c-alert--success {
+  background-color: var(--alert__background-color--success);
+  border-color: var(--alert__border-color--success);
+}
