@@ -47,6 +47,12 @@ then run npm commands directly:
    `react-components.help-drawer`, `react-components.tooltip`). These libraries
    are called within the relevant Drupal twig templates.
 
+## Styling
+Baseline styling has been brought over directly from the CMS Design system.
+Some component styling has been modified for demonstration purposes (i.e.,
+some small adjustments were added so that things display nicer along with the
+styling provided by the Olivero core theme.)
+
 ## Troubleshooting
 
 If you have issues getting the development server running, or bundling
