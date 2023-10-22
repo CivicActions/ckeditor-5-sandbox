@@ -1,0 +1,19 @@
+cke5_enhanced_table_plugin_table:
+  ckeditor5:
+    plugins:
+      - tablePlugin.EnhancedTable
+    config:
+      table:
+        contentToolbar: [ setEnhancedTable ]
+  drupal:
+    label: Enhanced Table
+    library: cke5_enhanced_table_plugin/enhancedtable
+    admin_library: cke5_enhanced_table_plugin/enhancedtable.admin
+    elements:
+      - <div>
+      - <div class="table-wrapper">
+      - <table>
+      - <table class>
+    conditions:
+      plugins:
+        - ckeditor5_table

@@ -7,6 +7,7 @@ module:
   block: 0
   block_content: 0
   breakpoint: 0
+  cke5_enhanced_table_plugin: 0
   cke5_helpdrawer_plugin: 0
   cke5_note_plugin: 0
   cke5_tooltip_plugin: 0

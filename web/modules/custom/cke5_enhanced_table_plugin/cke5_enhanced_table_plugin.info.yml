@@ -1,0 +1,8 @@
+name: CKE5 Enhanced Table Plugin
+type: module
+description: This module provides custom CKEditor 5 plugin for enhanced tables.
+core_version_requirement: ^9 || ^10
+package: CKE5 Custom Plugins
+dependencies:
+  - drupal:editor
+  - drupal:ckeditor5

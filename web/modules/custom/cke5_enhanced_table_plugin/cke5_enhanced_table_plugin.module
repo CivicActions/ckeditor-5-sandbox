@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * Implements hook_preprocess_HOOK().
+ * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+ */
+function cke5_enhanced_table_plugin_preprocess_field__body(&$variables) {
+
+  $items = $variables['element']['#items'];
+
+  $value = $items->first()->getValue()['value'];
+
+  if (str_contains($value, '<table')) {
+    $variables['#attached']['library'][] = 'cke5_enhanced_table_plugin/enhancedtable';
+  }
+}

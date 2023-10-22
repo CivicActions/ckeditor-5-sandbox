@@ -1,0 +1,18 @@
+enhancedtable:
+  js:
+    js/build/tablePlugin.js: { preprocess: false, minified: true }
+    js/responsive-table.js: { }
+    js/sticky-header.js: { }
+  dependencies:
+    - core/ckeditor5
+    - core/jquery
+    - core/once
+  css:
+    theme:
+      css/responsive-table.css: { }
+      css/sticky-header.css: { }
+
+enhancedtable.admin:
+  css:
+    theme:
+      css/table.admin.css: { }
