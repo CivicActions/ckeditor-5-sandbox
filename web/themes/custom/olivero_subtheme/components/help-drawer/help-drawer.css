@@ -1,5 +1,4 @@
 /*
-  [PLACEHODER]
   Additional help drawer styling for
   demonstration purposes.
   The primary styling for the help drawer
@@ -7,3 +6,7 @@
   scripts.
   See: react-components/src/help-drawer/
 */
+
+.dialog-off-canvas-main-canvas .ds-c-help-drawer {
+  top: var(--drupal-displace-offset-top);
+}

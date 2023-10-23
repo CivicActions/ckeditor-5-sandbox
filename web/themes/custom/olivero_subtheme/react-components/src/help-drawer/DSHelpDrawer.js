@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { decode } from 'html-entities';
 import HTMLReactParser from 'html-react-parser';
 import HelpDrawerToggle from '@cmsgov/design-system/dist/react-components/esm/HelpDrawer/HelpDrawerToggle';
@@ -7,17 +6,9 @@ import Tooltip from '@cmsgov/design-system/dist/react-components/esm/Tooltip/Too
 import { CloseIconThin, InfoCircleIconThin } from '@cmsgov/design-system/dist/react-components/esm/Icons';
 import '../tooltip/tooltip.scss';
 
-function DSHelpDrawer({toggle, drawer_heading, drawer_content}) {
-  const [drawer, showDrawer] = useState(false);
-
-  function handleDrawerOpen() {
-    showDrawer(true);
-    document.addEventListener('click', function(e) {
-      if (e.target.classList.contains('ds-c-help-drawer')) {
-        showDrawer(false);
-      }
-    });
-  }
+function DSHelpDrawer({drawerToggle, drawerHeading, drawerContent, drawerIndex, sharedDrawerState}) {
+  const { activeDrawer } = sharedDrawerState();
+  const { updateDrawers} = sharedDrawerState();
 
   // Options for the html-react-parser that target tooltips included
   // in help drawer content.
@@ -41,25 +32,23 @@ function DSHelpDrawer({toggle, drawer_heading, drawer_content}) {
       }
     }
   }
-
   return (
     <>
       <HelpDrawerToggle
-        helpDrawerOpen={drawer}
-        showDrawer={() => handleDrawerOpen()}
+        helpDrawerOpen={activeDrawer === drawerIndex}
+        showDrawer={() => updateDrawers(drawerIndex)}
         inline={true}
       >
-        {toggle} <InfoCircleIconThin ariaHidden={true} />
+        {drawerToggle} <InfoCircleIconThin ariaHidden={true} />
       </HelpDrawerToggle>
-      {drawer && <HelpDrawer
+      {(activeDrawer === drawerIndex) && <HelpDrawer
           closeButtonText={<CloseIconThin className="ds-u-font-size--lg" />}
           closeButtonVariation="ghost"
-          heading={drawer_heading}
-          onCloseClick={() => showDrawer(false)}
-          hasFocusTrap={true}
+          heading={drawerHeading}
+          onCloseClick={() => updateDrawers(null)}
           headingLevel={2}
         >
-        {HTMLReactParser(decode(drawer_content), options)}
+        {HTMLReactParser(decode(drawerContent), options)}
         </HelpDrawer>
       }
     </>

@@ -1,6 +1,4 @@
 // Component styling from the CMS Design system.
-// Styling has been modified for demonstration
-// purposes.
 
 @use '../scss/layout' as *;
 @use '../scss/mixins';
@@ -19,27 +17,13 @@
 
 /* Help drawer toggle */
 .ds-c-drawer__toggle {
-  background-color: transparent;
-  border: 0;
-  color: var(--color-primary);
-  cursor: pointer;
   display: block;
-  font-size: inherit;
   font-weight: var(--font-weight-normal);
   padding: 0;
 
   @media (-ms-high-contrast: active), (forced-colors: active) {
     padding: $spacer-half $spacer-2;
   }
-
-  > .ds-c-icon {
-    height: 1em;
-    width: 1em;
-  }
-
-  > .ds-c-icon path {
-    fill: var(--color-primary);
-  } 
 }
 
 .ds-c-drawer__toggle--inline {
@@ -64,8 +48,7 @@
   // If `hasFocusTrap` enabled, `background` should
   // not be visible.
   &::backdrop {
-    background-color: var(--color-gray);
-    opacity: 0.5;
+    background: transparent;
   }
 
   @media (min-width: $media-width-md) {
@@ -119,14 +102,6 @@
 
 .ds-c-drawer__close-button {
   align-self: flex-start;
-  background-color: transparent;
-  border: 0;
-  cursor: pointer;
-
-  > .ds-c-icon {
-    height: 1em;
-    width: 1em;
-  }
 }
 
 // This element is focusable via a tabindex attribute.
