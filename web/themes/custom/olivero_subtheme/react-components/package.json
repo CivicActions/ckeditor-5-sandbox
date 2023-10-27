@@ -3,6 +3,18 @@
   "version": "1.0.0",
   "description": "Bundled CMS Design System React components for use in Drupal",
   "targets": {
+    "alert": {
+      "context": "browser",
+      "source": "./src/alert/alert.html",
+      "distDir": "./build",
+      "sourceMap": false
+    },
+    "button": {
+      "context": "browser",
+      "source": "./src/button/button.html",
+      "distDir": "./build",
+      "sourceMap": false
+    },
     "help-drawer": {
       "context": "browser",
       "source": "./src/help-drawer/help-drawer.html",

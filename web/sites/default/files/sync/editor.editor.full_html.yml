@@ -51,6 +51,14 @@ settings:
       startIndex: false
     ckeditor5_sourceEditing:
       allowed_tags: {  }
+    ckeditor_link_styles_linkStyles:
+      styles:
+        -
+          label: 'Solid Button'
+          element: '<a class="ds-c-button ds-c-button--solid">'
+        -
+          label: 'Alternate Solid Button'
+          element: '<a class="ds-c-button ds-c-button--alternate ds-c-button--solid">'
 image_upload:
   status: true
   scheme: public
