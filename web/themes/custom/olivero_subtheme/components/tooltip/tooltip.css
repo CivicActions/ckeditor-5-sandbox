@@ -1,13 +1,17 @@
 /*
-  Additional tooltip styling for
-  demonstration purposes.
-  The primary styling for the tooltip
-  component is included with the React
-  scripts.
-  See: react-components/src/tooltip/
+  Override styling for the Olivero subtheme,
+  and for CKEditor views.
 */
 
 .tooltip .ds-c-tooltip__content {
   font-size: 1rem;
   line-height: 1.3;
+}
+
+.ck-content .ds-c-tooltip__trigger-link {
+  text-decoration-color: inherit;
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }

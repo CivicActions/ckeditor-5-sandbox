@@ -1,0 +1,14 @@
+/*
+  Override styling for the Olivero subtheme,
+  and for CKEditor views.
+*/
+
+.text-content a[class^="ds"],
+.text-content a[class^="ds"]:hover {
+  box-shadow: none;
+} 
+
+.ck .ds-c-button.ds-c-button--solid.ck-link_selected,
+.ck .ds-c-button.ds-c-button--solid.ds-c-button--alternate.ck-link_selected {
+  background-color: var(--backgroundColor);
+}

@@ -23,7 +23,7 @@ export default class NoteUI extends Plugin {
 
       // Create the toolbar button.
       buttonView.set( {
-        label: editor.t( 'Note' ),
+        label: editor.t( 'Alert' ),
         icon,
         tooltip: true,
       } );

@@ -12,5 +12,10 @@ ckeditor5-stylesheets:
   # Include the CSS custom properties (a.k.a. 'variables') from the CMS
   # Design System.
   - https://design.cms.gov/cdn/design-system/8.0.2/css/core-theme.css
+  - react-components/build/alert/alert.bundle.css
   - components/alert/alert.css
+  - react-components/build/button/button.bundle.css
+  - components/button/button.css
+  - components/help-drawer/help-drawer.css
+  - components/tooltip/tooltip.css
   - css/cke5-styles.css

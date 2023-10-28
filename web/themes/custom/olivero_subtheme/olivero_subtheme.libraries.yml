@@ -7,7 +7,10 @@ global:
       https://design.cms.gov/cdn/design-system/8.0.2/css/core-theme.css: { type: external, minified: true }
       css/styles.css: {}
     component:
+      react-components/build/alert/alert.bundle.css: { minified: true }
       components/alert/alert.css: {}
+      react-components/build/button/button.bundle.css: { minified: true }
+      components/button/button.css: {}
 
 react-components.shared:
   version: VERSION
