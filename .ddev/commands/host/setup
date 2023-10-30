@@ -2,14 +2,17 @@
 
 ## Description: Configures local setup
 ## Usage: setup
-## Example: setup
-
-echo "=== Import DB:"
-ddev import-db -f ckeditor-5-sandbox.sql.gz
+## Example: ddev setup
 
 echo "=== Composer install:"
 ddev composer install
+
+echo "=== Minimal site install:"
+ddev drush si minimal -y --account-name=admin --account-mail=admin@admin.com --account-pass=admin
 ddev drush cr
+
+echo "=== Import DB:"
+ddev import-db -f ckeditor-5-sandbox.sql.gz
 ddev drush updb -y
 ddev drush cr
 

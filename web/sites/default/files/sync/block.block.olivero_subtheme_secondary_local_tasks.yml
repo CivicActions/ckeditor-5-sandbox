@@ -9,7 +9,7 @@ _core:
 id: olivero_subtheme_secondary_local_tasks
 theme: olivero_subtheme
 region: highlighted
-weight: -2
+weight: -4
 provider: null
 plugin: local_tasks_block
 settings:

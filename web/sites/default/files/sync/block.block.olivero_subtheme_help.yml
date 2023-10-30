@@ -10,8 +10,8 @@ _core:
   default_config_hash: VfPFqqxfkomud5CO8DUijw85QIl9GIxh_nIxLOYESxg
 id: olivero_subtheme_help
 theme: olivero_subtheme
-region: sidebar_first
-weight: 0
+region: highlighted
+weight: -3
 provider: null
 plugin: help_block
 settings:

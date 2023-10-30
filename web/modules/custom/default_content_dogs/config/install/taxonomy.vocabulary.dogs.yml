@@ -1,7 +1,0 @@
-vid: dogs
-name: Dogs
-description: 'Dogs'
-hierarchy: 1
-weight: -10
-status: true
-langcode: en

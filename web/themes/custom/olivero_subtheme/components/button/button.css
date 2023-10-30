@@ -5,6 +5,7 @@
 
 .text-content a[class^="ds"],
 .text-content a[class^="ds"]:hover {
+  color: var(--button-solid__color);
   box-shadow: none;
 } 
 
