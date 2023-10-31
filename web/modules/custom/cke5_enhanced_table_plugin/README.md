@@ -64,23 +64,3 @@ plugin js file located in `js/build`.
 
 The library is referenced for use in the module's .ckeditor5.yml plugin
 definition file.
-
-### Bundle the CKEditor 5 Plugin
-To bundle the plugin js:
-
-- Install webpack (if needed): `ddev yarn add webpack`
-- From the module directory, run: `ddev yarn webpack`.
-
-## Developer References
-
-### CKEditor 5 Dev Tools
-
-The [ckeditor5_dev](https://www.drupal.org/project/ckeditor5_dev) module
-provides an inspector tool and a plugin template to assist with the
-development of custom CKEditor 5 plugins.
-
-### CKEditor Ecosystem Documentation
-
-The CKEditor [Ecosystem Documentation](https://ckeditor.com/docs/ckeditor5/latest/framework/plugins/creating-simple-plugin-timestamp.html) site provides an
-overview of the CKEditor 5 framework and resources for developing CKEditor 5
-custom plugins.

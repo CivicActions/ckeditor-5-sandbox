@@ -28,6 +28,7 @@ export default class EnhancedTableEditing extends Plugin {
       { id: 'responsive', classes: 'cke5-responsive-table' }
     ];
 
+    // Extends the table model to allow extra attributes.
     model.schema.extend('table', {
       allowAttributes: ['sticky', 'responsive', 'class']
     });

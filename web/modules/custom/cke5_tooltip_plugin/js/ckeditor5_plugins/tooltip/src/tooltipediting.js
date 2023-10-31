@@ -16,11 +16,18 @@ export default class TooltipEditing extends Plugin {
     );
   }
 
+  /**
+   * This registers the structure that will be seen by CKEditor 5 as
+   * <tooltip data-tooltip-id></tooltip>
+   */
   _defineSchema() {
     const schema = this.editor.model.schema;
     schema.extend( '$text', { allowAttributes: 'tooltip' } );
   }
 
+  /**
+   * Determines how to convert the tooltip model from the markup and vice-versa.
+   */
   _defineConverters() {
     const conversion = this.editor.conversion;
 

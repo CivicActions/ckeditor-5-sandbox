@@ -6,10 +6,9 @@
  */
 function cke5_enhanced_table_plugin_preprocess_field__body(&$variables) {
 
+  // Attach library to body fields that have tables within them.
   $items = $variables['element']['#items'];
-
   $value = $items->first()->getValue()['value'];
-
   if (str_contains($value, '<table')) {
     $variables['#attached']['library'][] = 'cke5_enhanced_table_plugin/enhancedtable';
   }
