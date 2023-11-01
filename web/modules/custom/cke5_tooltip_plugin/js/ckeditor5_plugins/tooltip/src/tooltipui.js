@@ -42,6 +42,7 @@ export default class TooltipUI extends Plugin {
     const editor = this.editor;
     const formView = new TooltipFormView( editor.locale );
 
+    // When submitted execute the insertTooltip command with form values.
     this.listenTo( formView, 'submit', () => {
       const value  = {
         title: formView.titleInputView.fieldView.element.value,
@@ -66,6 +67,7 @@ export default class TooltipUI extends Plugin {
     return formView;
   }
 
+  // Show the tooltip form view
   _showUI() {
     const editor = this.editor;
     const selection = editor.model.document.selection;
@@ -92,6 +94,7 @@ export default class TooltipUI extends Plugin {
     this.formView.focus();
   }
 
+  // Hide the tooltip form view
   _hideUI() {
     this.formView.titleInputView.fieldView.value = '';
     this.formView.tooltipInputView.fieldView.value = '';
@@ -114,6 +117,7 @@ export default class TooltipUI extends Plugin {
     };
   }
 
+  // Show the balloon when a tooltip is clicked
   _enableBalloonActivators() {
     const editor = this.editor;
     const document = editor.editing.view.document;

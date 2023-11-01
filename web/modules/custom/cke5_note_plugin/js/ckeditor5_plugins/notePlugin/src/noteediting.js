@@ -168,6 +168,7 @@ export default class NoteEditing extends Plugin {
 
     // If <div class="ds-c-alert__heading"> is present in the existing markup
     // processed by CKEditor, then CKEditor recognizes and loads it as a
+    // noteTitle.
     conversion.for('upcast').elementToElement( {
       model: 'noteTitle',
       view: {
@@ -178,6 +179,7 @@ export default class NoteEditing extends Plugin {
 
     // If <div class="ds-c-alert__text"> is present in the existing markup
     // processed by CKEditor, then CKEditor recognizes and loads it as a
+    // noteDescription.
     conversion.for('upcast').elementToElement( {
       model: 'noteDescription',
       view: {
@@ -194,6 +196,13 @@ export default class NoteEditing extends Plugin {
       view: 'class'
     })
 
+    // This provides a downcast from a single model element, the <note>, into a
+    // couple of nested divs with their associated classes:
+    // < div class="ds-c-alert">
+    //   <div class="ds-c-alert__body">
+    //     {{inner_content}}
+    //   </div>
+    // </div>
     conversion.for('downcast').elementToStructure( {
       model: {
         name: 'note',

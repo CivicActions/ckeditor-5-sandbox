@@ -17,6 +17,10 @@ export default class HelpDrawerEditing extends Plugin {
 
   }
 
+  /**
+   * This registers the structure that will be seen by CKEditor 5 as
+   * <helpDrawer data-drawer-id></helpDrawer>
+   */
   _defineSchema() {
     const schema = this.editor.model.schema;
 
@@ -25,6 +29,10 @@ export default class HelpDrawerEditing extends Plugin {
     } );
   }
 
+  /**
+   * Determines how to convert to the helpDrawer model from its markup and
+   * vice-versa.
+   */
   _defineConverters() {
     const conversion = this.editor.conversion;
 
